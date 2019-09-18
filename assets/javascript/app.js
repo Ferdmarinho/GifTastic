@@ -1,6 +1,6 @@
 //GIPHY API Call
 
-var decades = ['20s', '30s', '40s', '50s', '60s', '70s', '80s', '90s', '00s', '10s'];
+var food = ['wine','chocolat','cheese','pizza'];
 
 var xhr = $.get("https://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=qQ0LQq49j0vnEylR5TyfMMEiuCje5z0c&limit=5");
 xhr.done(function (data) {
@@ -10,39 +10,43 @@ xhr.done(function (data) {
 var title = "The%20Lord+Of+The+Rings";
 var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + title + "&api_key=qQ0LQq49j0vnEylR5TyfMMEiuCje5z0c&limit=5";
 
+
 $(document).ready(function () {
 
     // Append Intial animal buttons
     rendergifbuttons();
 
+
     function rendergifbuttons() {
-        $("#gif-list").empty(); // empties out the html
+        $("#gif-display").empty(); // empties out the html
 
         // render our todos to the page
-        for (var i = 0; i < decades.length; i++) {
+        for (var i = 0; i < food.length; i++) {
             // Then set the to-do "value" as text to this <button> element.
 
             var gifitem = $('<button>');
-            gifitem.attr("data-gif", decades[i]);
+            gifitem.attr("data-gif", food[i]);
             gifitem.addClass("load-gif");
-            gifitem.text(decades[i]);
+            gifitem.text(food[i]);
 
             // Create a button with unique identifiers based on what number it is in the list. Again use jQuery to do this.
             // Give your button a data attribute called data-to-do and a class called "checkbox".
             // Lastly add a checkmark inside.
             // Add the button to the div
-            $("#gif-list").append(gifitem);
+            $("#gif-display").append(gifitem);
         }
     }
 
     $("#add-gif").on("click", function () {
 
+      
+
         // Get the to-do "value" from the textbox and store it as a variable
         var newdecade = $("#gif").val().trim();
 
         var isUnique = true;
-        for (var i = 0; i < decades.length; i++) {
-            if (decades[i] == newdecade) {
+        for (var i = 0; i < food.length; i++) {
+            if (food[i] == newdecade) {
                 isUnique = false;
             }
         }
@@ -55,7 +59,7 @@ $(document).ready(function () {
         else if (isUnique) {
 
             // Add the new decade button to the list
-            decades.push(newdecade);
+            food.push(newdecade);
 
             // Add new buttons to the DOM
             rendergifbuttons();
@@ -70,6 +74,7 @@ $(document).ready(function () {
         return false;
 
     })
+
 
     var title = "The%20Lord+Of+The+Rings";
 
@@ -93,7 +98,7 @@ $(document).ready(function () {
                 var $img = $('<img>');
             
 
-                $("#gif-list").append($img);
+                $("#gif-display").append($img);
                 $img.attr("src", imageurl);
               
 
@@ -105,3 +110,4 @@ $(document).ready(function () {
     });
 
 });
+
