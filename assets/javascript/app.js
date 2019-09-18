@@ -92,7 +92,6 @@ function displayGifs(){
           currentRating = "none";
         }
 
-
       //makes a div to add the GIFs and their ratings
       var currentGifDiv = $('<div>');
       currentGifDiv.addClass('gif_container'); // Added a class
@@ -118,7 +117,6 @@ function displayGifs(){
 
       // Append current Div to the DOM
         $('#gif_display').append(currentGifDiv);
-
     }
 
   });	
