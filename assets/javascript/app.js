@@ -1,4 +1,4 @@
-//GIPHY API Call
+2//GIPHY API Call
 
 var food = ['wine','chocolat','cheese','pizza'];
 
@@ -7,22 +7,22 @@ xhr.done(function (data) {
     console.log("success got data", data)
 });
 
-var title = "The%20Lord+Of+The+Rings";
+var title = "searchterm";
 var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + title + "&api_key=qQ0LQq49j0vnEylR5TyfMMEiuCje5z0c&limit=5";
 
 
 $(document).ready(function () {
 
-    // Append Intial animal buttons
-    rendergifbuttons();
+    //Append buttons
+    showgifbuttons();
 
-
-    function rendergifbuttons() {
-        $("#gif-display").empty(); // empties out the html
+    function showgifbuttons() {
+        //So the gifs area doesn't keep adding up a bunch of gifs, it needs to be cleared first
+        $("#gif-display").empty(); 
 
         // render our todos to the page
         for (var i = 0; i < food.length; i++) {
-            // Then set the to-do "value" as text to this <button> element.
+            // Then set the to-do "value" as text to this <button> HTML tag.
 
             var gifitem = $('<button>');
             gifitem.attr("data-gif", food[i]);
@@ -39,44 +39,36 @@ $(document).ready(function () {
 
     $("#add-gif").on("click", function () {
 
-      
-
         // Get the to-do "value" from the textbox and store it as a variable
-        var newdecade = $("#gif").val().trim();
+        var keyword = $("#gif").val().trim();
 
         var isUnique = true;
         for (var i = 0; i < food.length; i++) {
-            if (food[i] == newdecade) {
+            if (food[i] == keyword) {
                 isUnique = false;
             }
         }
 
-        // Append new button if the input is unique
-        if (newdecade == "") {
-            alert("Sorry. No empty buttons are allowed!")
+        //Empty keywords are not allowed
+        if (keyword == "") {
+            alert("No empty buttons")
         }
-
+        //Append new button if the input is unique
         else if (isUnique) {
-
-            // Add the new decade button to the list
-            food.push(newdecade);
-
-            // Add new buttons to the DOM
-            rendergifbuttons();
-
-            // // Adding our new todo to our local list variable and adding it to l
+         // ADDS the keyword typed as a button to the list 
+            food.push(keyword);
+        // Add new buttons to the DOM
+            showgifbuttons();
+            // // Adding our new todo to our local list variable
         }
         else {
-            alert("You already have a " + newdecade + " button!")
+            alert("There is  " + keyword + " button for that yo!")
         }
-
-        // Remove the default features of the Submit Button
+        //Submit would usually send info, but we don't need that so
         return false;
-
     })
 
-
-    var title = "The%20Lord+Of+The+Rings";
+    var title = "searchterm";
 
     $(document).on("click", ".load-gif", function () {
         var gifnumber = $(this).attr("data-gif"); 
@@ -93,21 +85,25 @@ $(document).ready(function () {
             console.log(response);
             for (var i = 0; i < response.data.length; i++) {
 
-                // Collect the animal gif URLs
-                var imageurl = response.data[i].images.fixed_height.url; // moving image
-                var $img = $('<img>');
-            
+             //To get the GIFs URls 
+            var imageurl = response.data[i].images.fixed_height.url; // moving image
+            var $img = $('<img>');
 
-                $("#gif-display").append($img);
-                $img.attr("src", imageurl);
+            $("#gif-display").append($img);
+            $img.attr("src", imageurl);
               
-
-
-
             }
 
         });
     });
+
+    //TO MAKE THE GIFS STOP AND PLAY
+
+
+
+
+
+
 
 });
 
